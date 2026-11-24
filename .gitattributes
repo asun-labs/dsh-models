@@ -1,0 +1,4 @@
+* text=auto eol=lf
+third-party/** -text
+# 原始许可按字节保留，上游换行不作为本项目的格式错误。
+third-party/savage/LICENSE.html whitespace=-blank-at-eol,-blank-at-eof

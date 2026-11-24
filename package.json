@@ -1,0 +1,54 @@
+{
+  "name": "dsh-models",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "SAVAGE 三维模型库：分类浏览、预览截图与原始模型下载链接",
+  "repository": { "type": "git", "url": "git+https://github.com/asun-labs/dsh-models.git" },
+  "homepage": "https://github.com/asun-labs/dsh-models#readme",
+  "bugs": { "url": "https://github.com/asun-labs/dsh-models/issues" },
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./client-api": "./lib/client-api.cjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "third-party"
+  ],
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node --test --test-concurrency=1 tests/*.test.mjs",
+    "pack:release": "node scripts/pack.mjs",
+    "verify:browser": "node scripts/verify-browser.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-layout"
+      ],
+      "platform": "web"
+    }
+  },
+  "peerDependencies": {
+    "react": "18.3.1"
+  },
+  "devDependencies": {
+    "jsdom": "29.1.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsdown": "0.22.2",
+    "playwright": "1.63.0-alpha-2026-08-31"
+  }
+}
