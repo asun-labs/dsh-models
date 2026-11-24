@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
+import { runInNewContext } from 'node:vm'
 import test from 'node:test'
 import { JSDOM } from 'jsdom'
 import React, { act } from 'react'
@@ -10,13 +12,19 @@ import { buildPlugin } from '../scripts/build.mjs'
 await buildPlugin()
 const require = createRequire(import.meta.url)
 
-function browser(t) {
+function browser(t, entry = 'api') {
   const dom = new JSDOM('<!doctype html><html><head></head><body><div id="root"></div></body></html>')
   const previous = { window: globalThis.window, document: globalThis.document }
   globalThis.window = dom.window
   globalThis.document = dom.window.document
   globalThis.IS_REACT_ACT_ENVIRONMENT = true
-  const loaded = require('../lib/client-api.cjs')
+  let loaded
+  if (entry === 'native') {
+    runInNewContext(readFileSync(new URL('../lib/client.js', import.meta.url), 'utf8'), {
+      window: { __ModuleLoader__: { load({ id, factory }) { assert.equal(id, 'dsh-models'); loaded = factory(require) } } },
+      document: dom.window.document,
+    })
+  } else loaded = require('../lib/client-api.cjs')
   const root = createRoot(document.getElementById('root'))
   t.after(async () => {
     await act(async () => root.unmount())
@@ -64,8 +72,8 @@ test('分类、型号搜索、分页与截图失败保留来源和下载入口',
   assert.equal(button('下一页').disabled, true)
 })
 
-test('原生 DSH 注册完整主面板和侧栏，卸载释放槽位与样式', async t => {
-  const { loaded } = browser(t)
+test('原生 Loader 同步配置不作为宿主回调，原生槽位与样式随卸载释放', async t => {
+  const { loaded } = browser(t, 'native')
   const entries = [], effects = []
   const ctx = {
     effect(callback) { const release = callback(); effects.push(release); return release },
@@ -74,7 +82,9 @@ test('原生 DSH 注册完整主面板和侧栏，卸载释放槽位与样式', 
       register(options, component) { const entry = { options, component }; entries.push(entry); return () => entries.splice(entries.indexOf(entry), 1) },
     },
   }
-  loaded.apply(ctx)
+  const syncedConfig = {}
+  Object.defineProperty(syncedConfig, 'registerPanel', { get() { throw new Error('原生同步配置不能作为宿主集成选项读取') } })
+  loaded.apply(ctx, syncedConfig)
   assert.deepEqual(entries.map(entry => entry.options.name), ['main', 'sidebar.panellist'])
   assert.equal(entries[0].options.key, 'dsh-models')
   assert.equal(entries[1].options.label, '模型库')

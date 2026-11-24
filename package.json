@@ -1,6 +1,6 @@
 {
   "name": "dsh-models",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "description": "SAVAGE 三维模型库：分类浏览、预览截图与原始模型下载链接",

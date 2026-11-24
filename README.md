@@ -14,7 +14,7 @@ npm test
 npm run pack:release
 ```
 
-完整包位于 dist/dsh-models-0.1.0.tgz，同时生成 .json 与 .sha256。包包含 Host、原生客户端、client-api.cjs、DSH bundle 与第三方许可；不包含 src、构建脚本或开发依赖，安装时无需编译。预编译包尚未发布到 GitHub Releases；package.json 的 private 标记保留，不发布到 npm。
+完整包位于 dist/dsh-models-0.1.1.tgz，同时生成 .json 与 .sha256。包包含 Host、原生客户端、client-api.cjs、DSH bundle 与第三方许可；不包含 src、构建脚本或开发依赖，安装时无需编译。预编译包尚未发布到 GitHub Releases；package.json 的 private 标记保留，不发布到 npm。
 
 原生 DSH 可通过插件管理器安装该本地 tgz，启用 bundle 后左侧出现“模型库”，右侧展示完整界面，不接管原生侧栏。宿主集成可调用 dsh-models/client-api 的 apply(ctx, {registerPanel(options, Panel)})，由宿主决定面板和导航注册；样式仍随插件生命周期释放。
 
@@ -35,6 +35,12 @@ npm run verify:browser
 ```
 
 浏览器验证需要 Playwright Chromium，使用无头模式，不启动用户桌面窗口。截图写入 .build/browser。
+
+### 原生 DSH 验证
+
+0.1.1 已在原生 DSH `0.2.3-alpha.2` 验证完整包安装、菜单与桌面展示；同版原生内核的隔离 Web Profile 还验证了分类、搜索、截图、下载链接和空态，没有加载 Seal 适配层。隔离 Web Profile 使用公开的 `credentialOnboarding: false` 关闭首次 Key 引导，不配置真实 Key，也不修改用户 desktop Profile 的配置。
+
+原生 Loader 的第二个参数是同步配置，不能当作 `client-api` 的宿主集成回调。`src/client.jsx` 只向公开 API 转发 `ctx`；宿主回调仍由 `dsh-models/client-api` 显式接收。对应回归直接加载预编译原生入口，并验证同步配置不会被误读、原生槽位与样式可以清理。
 
 ## 数据与许可
 
