@@ -11,7 +11,8 @@ test('完整包携带预编译 API、原生 bundle 与许可，不携带 src 或
   t.after(() => rmSync(destination, { recursive: true, force: true }))
   const info = await packRelease(destination)
   const files = execFileSync('tar', ['-tzf', info.archive], { encoding: 'utf8', windowsHide: true }).split(/\r?\n/)
-  for (const file of ['package/lib/index.js', 'package/lib/client.js', 'package/lib/client-api.cjs', 'package/cordis.patch.yml', 'package/npm-shrinkwrap.json', 'package/third-party/savage/LICENSE.html']) assert.ok(files.includes(file), file)
+  for (const file of ['package/lib/index.js', 'package/lib/client.js', 'package/lib/client-api.cjs', 'package/lib/mcp.cjs', 'package/lib/viewer/index.html', 'package/lib/viewer/viewer.js',
+    'package/lib/skills/dsh-models-use/SKILL.md', 'package/cordis.patch.yml', 'package/npm-shrinkwrap.json', 'package/third-party/savage/LICENSE.html', 'package/third-party/runtime/provenance.json']) assert.ok(files.includes(file), file)
   assert.equal(files.some(file => file.startsWith('package/src/') || file.startsWith('package/scripts/')), false)
   const manifest = JSON.parse(execFileSync('tar', ['-xOf', info.archive, 'package/package.json'], { encoding: 'utf8', windowsHide: true }))
   assert.equal(manifest.scripts, undefined)

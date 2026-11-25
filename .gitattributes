@@ -2,3 +2,8 @@
 third-party/** -text
 # 原始许可按字节保留，上游换行不作为本项目的格式错误。
 third-party/savage/LICENSE.html whitespace=-blank-at-eol,-blank-at-eof
+third-party/github/*LICENSE.txt whitespace=-blank-at-eol,-blank-at-eof
+# 保留随包说明的 CRLF 与原始许可末尾空行，不改写许可摘要。
+third-party/VIEWER-NOTICE.md whitespace=cr-at-eol
+third-party/github/NOTICE.md whitespace=cr-at-eol
+third-party/runtime/ajv/LICENSE whitespace=-blank-at-eof

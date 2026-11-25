@@ -1,18 +1,24 @@
 {
   "name": "dsh-models",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "private": true,
   "type": "module",
-  "description": "SAVAGE 三维模型库：分类浏览、预览截图与原始模型下载链接",
-  "repository": { "type": "git", "url": "git+https://github.com/asun-labs/dsh-models.git" },
+  "description": "综合三维资产索引：家装、设备、装备与其他资源，保留来源、署名和逐项许可",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asun-labs/dsh-models.git"
+  },
   "homepage": "https://github.com/asun-labs/dsh-models#readme",
-  "bugs": { "url": "https://github.com/asun-labs/dsh-models/issues" },
+  "bugs": {
+    "url": "https://github.com/asun-labs/dsh-models/issues"
+  },
   "main": "./lib/index.js",
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
     "./client-api": "./lib/client-api.cjs",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./mcp": "./lib/mcp.cjs"
   },
   "files": [
     "lib",
@@ -27,7 +33,8 @@
     "build": "node scripts/build.mjs",
     "test": "node scripts/build.mjs && node --test --test-concurrency=1 tests/*.test.mjs",
     "pack:release": "node scripts/pack.mjs",
-    "verify:browser": "node scripts/verify-browser.mjs"
+    "verify:browser": "node scripts/verify-browser.mjs",
+    "verify:viewer": "node scripts/verify-viewer.mjs"
   },
   "dsh": {
     "bundle": {
@@ -36,7 +43,10 @@
     "client": {
       "inject": [
         "@deepseek-ai/dsh-client-ui-renderer",
-        "@deepseek-ai/dsh-client-ui-layout"
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-api-workspace-controller"
       ],
       "platform": "web"
     }
@@ -45,10 +55,16 @@
     "react": "18.3.1"
   },
   "devDependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
     "jsdom": "29.1.1",
+    "parse5": "8.1.1",
+    "playwright": "1.63.0-alpha-2026-08-31",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "tsdown": "0.22.2",
-    "playwright": "1.63.0-alpha-2026-08-31"
+    "three": "0.180.0",
+    "tsdown": "0.22.2"
+  },
+  "bin": {
+    "dsh-models-mcp": "./lib/mcp.cjs"
   }
 }

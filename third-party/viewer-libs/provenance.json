@@ -1,0 +1,52 @@
+[
+  {
+    "name": "chevrotain",
+    "licenseEvidenceVersion": "9.0.1",
+    "license": "Apache-2.0",
+    "archive": "https://registry.npmjs.org/chevrotain/-/chevrotain-9.0.1.tgz",
+    "integrity": "sha512-7rFWS+G8yavnYK5AcqSL9mSXPRfz+atuwM4Hq5Ph/CNM7n7zl3woPXMGWS+cdxSD01nic4PozN12zaw1Fu8cug==",
+    "files": {
+      "LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  },
+  {
+    "name": "@chevrotain/types",
+    "licenseEvidenceVersion": "9.0.1",
+    "license": "Apache-2.0",
+    "archive": "https://registry.npmjs.org/@chevrotain/types/-/types-9.0.1.tgz",
+    "integrity": "sha512-jyIgbvb0Vz3OhLdImiufolBxRNAPFhpZmWuNWQ9ffU+nsxLJ0a0yObRCkdT2MKGXolwLZow3r8zhVr/7f5yNSA==",
+    "files": {
+      "LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  },
+  {
+    "name": "@chevrotain/utils",
+    "licenseEvidenceVersion": "9.0.0",
+    "license": "Apache-2.0",
+    "archive": "https://registry.npmjs.org/@chevrotain/utils/-/utils-9.0.0.tgz",
+    "integrity": "sha512-J0uI+VxqCMiTFmVD95dfZr1QxJcw1RMQc7X3umMAfEcG5f2uWrZeyX0h3hURvXgzUcK6vXH5r+SNv+4bPxWpdg==",
+    "files": {
+      "LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    }
+  },
+  {
+    "name": "regexp-to-ast",
+    "licenseEvidenceVersion": "0.5.0",
+    "license": "MIT",
+    "archive": "https://registry.npmjs.org/regexp-to-ast/-/regexp-to-ast-0.5.0.tgz",
+    "integrity": "sha512-tlbJqcMHnPKI9zSrystikWKwHkBqu2a/Sgw01h3zFjvYrMxEDYHzzoMZnUrbIfpTFEsoRnnviOXNCzFiSc54Qw==",
+    "files": {
+      "LICENSE": "ffdfd706a54ae16965504e916e4e236bc76bcd1573c6f88045daec6c1fed64c5"
+    }
+  },
+  {
+    "name": "meshoptimizer",
+    "licenseEvidenceVersion": "0.22.0",
+    "license": "MIT",
+    "archive": "https://registry.npmjs.org/meshoptimizer/-/meshoptimizer-0.22.0.tgz",
+    "integrity": "sha512-IebiK79sqIy+E4EgOr+CAw+Ke8hAspXKzBd0JdgEmPHiAwmvEj2S4h1rfvo+o/BnfEYd/jAOg5IeeIjzlzSnDg==",
+    "files": {
+      "LICENSE.md": "d1bc307ff896c7fc65e3ff4823cc478194f7a5bc6436f99534ebede4d9e2017a"
+    }
+  }
+]

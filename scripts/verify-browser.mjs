@@ -19,10 +19,8 @@ import React from ${importPath(desktopRequire.resolve('react'))};
 import { createRoot } from ${importPath(desktopRequire.resolve('react-dom/client'))};
 import { ModelsPanel } from ${importPath(join(source, 'client-api.jsx'))};
 import { styles } from ${importPath(join(source, 'styles.js'))};
-import catalog from ${importPath(join(source, 'savage-catalog.json'))};
-const ids=['AircraftFixedWing/F16FightingFalconTurkey/F16','GroundVehicles/M1A1/M1A1','ShipsMilitary/CarrierNimitzUnitedStates/NimitzCVN','Space/Satellites/RadarsatPrototype'];
 const style=document.createElement('style'); style.textContent=styles; document.head.append(style);
-createRoot(document.getElementById('root')).render(<ModelsPanel snapshot={{...catalog,models:catalog.models.filter(model=>ids.includes(model.id))}} />);
+createRoot(document.getElementById('root')).render(<ModelsPanel />);
 `)
 const { build } = await import(pathToFileURL(desktopRequire.resolve('tsdown')).href)
 await build({ config: false, entry: { preview: entry }, outDir: output, clean: false, dts: false,
@@ -39,8 +37,8 @@ try {
   page.on('pageerror', error => errors.push(error.message))
   await page.setContent('<html><head><style>html,body,#root{height:100%;margin:0}body{background:var(--dsw-alias-bg-layer-1)}</style></head><body><div id="root"></div></body></html>')
   await page.addScriptTag({ content: readFileSync(join(output, 'preview.iife.js'), 'utf8') })
-  await page.getByRole('heading', { name: '模型库', exact: true }).waitFor()
-  await page.waitForFunction(() => [...document.images].every(image => image.complete), null, { timeout: 20000 })
+  await page.getByRole('heading', { name: '资产库', exact: true }).waitFor()
+  await page.waitForFunction(() => [...document.images].some(image => image.complete && image.naturalWidth > 0), null, { timeout: 20000 })
   for (const theme of ['light', 'dark']) {
     await page.evaluate(dark => {
       const palette = dark ? ['#1c1d20', '#24262b', '#f1f2f3', '#a6a8ad', '#34363b'] : ['#ffffff', '#f5f6f8', '#202124', '#666b73', '#e3e5e8']
@@ -50,15 +48,27 @@ try {
     }, theme === 'dark')
     for (const viewport of [{ width: 1280, height: 720 }, { width: 390, height: 844 }]) {
       await page.setViewportSize(viewport)
-      assert.equal(await page.locator('article').count(), 4)
+      assert.equal(await page.locator('article').count(), 24)
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)
       assert.equal(overflow, false)
       await page.screenshot({ path: join(output, `${theme}-${viewport.width}.png`), fullPage: true })
     }
   }
-  await page.getByLabel('资源分类').selectOption('GroundVehicles')
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.getByRole('tab', { name: /设备/ }).click()
+  await page.getByLabel('资源来源').selectOption('kenney')
+  await page.getByLabel('子类分类').selectOption('electronics')
+  await page.getByRole('searchbox').fill('laptop')
   assert.equal(await page.locator('article').count(), 1)
-  assert.equal(await page.getByRole('link', { name: /^下载 .* X3D$/ }).count(), 1)
+  await page.screenshot({ path: join(output, 'devices.png'), fullPage: true })
+  await page.getByRole('tab', { name: /装备/ }).click()
+  await page.getByLabel('资源来源').selectOption('nasa')
+  assert.match(await page.getByRole('status').innerText(), /256 条资源/)
+  await page.screenshot({ path: join(output, 'nasa.png'), fullPage: true })
+  await page.getByLabel('资源来源').selectOption('savage')
+  await page.getByLabel('子类分类').selectOption('GroundVehicles')
+  assert.equal(await page.locator('article').count(), 24)
+  assert.equal(await page.getByRole('button', { name: /^下载 .* X3D$/ }).count(), 24)
   await page.getByRole('button', { name: '清除筛选' }).click()
   await page.getByRole('searchbox').fill('not-a-model')
   await page.getByRole('heading', { name: '没有找到匹配的模型' }).waitFor()

@@ -1,4 +1,10 @@
 export const categoryLabels = {
+  seating: '椅子与沙发', beds: '床具', storage: '柜架与收纳', tables: '桌台', lighting: '灯具照明',
+  structure: '门窗与结构', bathroom: '卫浴', decor: '软装与摆件', electronics: '电脑与电子',
+  appliances: '家电与烹饪设备', tools: '工具与厨具', audio: '音响设备', instruments: '仪器与穿戴',
+  spacecraft: '卫星与航天器', 'space-rovers': '探测车与着陆器', 'space-launchers': '火箭与发射系统',
+  'space-crewed': '载人航天', 'space-environments': '天体与科学场景',
+  animals: '动物', food: '食物', props: '日常道具',
   AircraftFixedWing: '固定翼飞机', AircraftHelicopters: '直升机', AmphibiousVehicles: '两栖车辆',
   AuvWorkbench: '水下航行器工作台', Avatars: '人物', Biologics: '生物', Buildings: '建筑',
   CommunicationsAndSensors: '通信与传感器', Environment: '环境', GroundVehicles: '地面车辆',
