@@ -1,6 +1,7 @@
 <div align="center">
 
 <h1>dsh-models</h1>
+<p><strong>简体中文</strong> · <a href="README.en.md">English</a></p>
 <p><strong>让灵感，拥有形状。</strong></p>
 <p><strong>为 DSH 打开一座可检索、可预览、可溯源的三维资产库。</strong><br>从一把椅子，到浩瀚宇宙；找到合适的模型，再带进当前工作区。</p>
 <p><strong>1,841 项资产</strong> &middot; <strong>6 个资源来源</strong> &middot; GLB / X3D &middot; 本地 3D 查看器</p>
