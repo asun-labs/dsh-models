@@ -1,6 +1,45 @@
-# dsh-models · 综合三维资产库
+<div align="center">
 
-用于发现、筛选和快速对接开放三维资产的独立 DSH 插件。业务源码、静态索引和缩略图仅在本工程维护；Seal Harness 引用完整预编译包与公开 client-api，完整界面在右侧呈现，左侧导航保持不变。
+<h1>dsh-models</h1>
+<p><strong>让灵感，拥有形状。</strong></p>
+<p><strong>为 DSH 打开一座可检索、可预览、可溯源的三维资产库。</strong><br>从一把椅子，到浩瀚宇宙；找到合适的模型，再带进当前工作区。</p>
+<p><strong>1,841 项资产</strong> &middot; <strong>6 个资源来源</strong> &middot; GLB / X3D &middot; 本地 3D 查看器</p>
+<p><a href="#产品预览">产品预览</a> &middot; <a href="#如何使用">如何使用</a> &middot; <a href="#页面与来源">资产来源</a> &middot; <a href="#开发同步和打包">开发与打包</a> &middot; <a href="#mcp">MCP 工具</a></p>
+
+</div>
+
+---
+
+## 产品预览
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/readme/library-desktop-dark.png">
+    <img src="docs/images/readme/library-desktop.png" width="960" alt="dsh-models 模型库桌面预览：顶部广告牌、四个分类、筛选栏和带来源及许可信息的模型卡片">
+  </picture>
+</p>
+
+<p align="center"><sub>实际插件界面的独立浏览器渲染截图。模型库嵌入 DSH 右侧面板；资源数对应 2026-11-25 的索引。</sub></p>
+
+<details>
+<summary>查看窄屏布局</summary>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/readme/library-mobile-dark.png">
+    <img src="docs/images/readme/library-mobile.png" width="390" alt="dsh-models 模型库窄屏预览：分类、筛选栏和模型卡片纵向排布">
+  </picture>
+</p>
+
+</details>
+
+## 如何使用
+
+1. **发现**：在家装、设备、装备、杂四个页签里浏览，按来源、子类或关键词缩小范围。
+2. **核对**：打开模型卡片上的来源和署名信息，确认具体资产的许可与使用要求。
+3. **取用**：点击“下载 GLB / X3D”保存原始文件到当前工作区；点击“使用”在内置 Three.js 查看器中检查实际模型。
+
+这是独立的 DSH 插件。业务源码、静态索引和缩略图仅在本工程维护；Seal Harness 引用完整预编译包与公开 `client-api`，完整界面在右侧呈现，左侧导航保持不变。目前尚未发布 GitHub Release 或 npm 包；开发者可按下方步骤从源码打包。
 
 ## 页面与来源
 
